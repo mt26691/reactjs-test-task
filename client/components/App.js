@@ -13,8 +13,8 @@ var appStore = require("../../stores/AppStore");
 
 function getAppState() {
   return {
-    showForm: appStore.getShowForm(),
-    products: appStore.getProducts()
+    products: appStore.getProducts(),
+    editableProduct: appStore.getEditableProduct()
   };
 }
 class App extends React.Component {
@@ -22,7 +22,6 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = getAppState();
-
     this._onChange = this._onChange.bind(this);
   }
 
@@ -34,10 +33,6 @@ class App extends React.Component {
     appStore.removeChangeListener(this._onChange);
   }
 
-  onShowFormClick(e) {
-    e.preventDefault();
-    appActions.showForm();
-  }
   render() {
 
     return (
@@ -48,19 +43,16 @@ class App extends React.Component {
             <div className="col-md-8 col-md-offset-2">
               <Switch>
                 <Route exact path="/" render={() => (
-                  <div>
                     <ProductList
                       products={this.state.products}
                     />
-                    <AddEditProduct />
-                  </div>
                 )} />
 
-                <Route exact path="/add" render={() => (
-                  <AddEditProduct />
+                <Route exact path="/add" render={(routeProps) => (
+                  <AddEditProduct {...routeProps} product={this.state.editableProduct} />
                 )} />
-                <Route exact path="/edit/:id" render={() => (
-                  <AddEditProduct />
+                <Route exact path="/edit/:id" render={(routeProps) => (
+                  <AddEditProduct {...routeProps} product={this.state.editableProduct} />
                 )} />
               </Switch>
             </div>
@@ -72,9 +64,9 @@ class App extends React.Component {
   }
 
   _onChange() {
+    console.log("app state changing1");
     this.setState(getAppState());
   }
 }
-
 
 export default App;

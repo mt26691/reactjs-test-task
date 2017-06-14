@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import AppAcion from '../../actions/AppAction';
+import { Link } from 'react-router-dom';
 
 export default class Product extends React.Component {
 
@@ -8,7 +9,7 @@ export default class Product extends React.Component {
     super(props);
     this.onDelete = this.onDelete.bind(this);
   }
-  
+
   onDelete() {
     AppAcion.deleteProduct(this.props.product.id);
   }
@@ -22,7 +23,7 @@ export default class Product extends React.Component {
         <td>{this.props.product.price}</td>
         <td>{this.props.product.creationDate}</td>
         <td>
-          <a className="btn btn-info" href={editLink} onClick={this.onDelete}>Edit</a>
+          <Link to={editLink} className="btn btn-info" >Edit</Link>
         </td>
         <td>
           <a className="btn btn-danger" href="#" onClick={this.onDelete}>Delete</a>

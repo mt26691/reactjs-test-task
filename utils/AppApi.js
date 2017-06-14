@@ -1,14 +1,15 @@
 var AppActions = require("../actions/AppAction");
-var firebase = require("firebase");
+import moment from 'moment';
 
-var app = firebase.initializeApp({
-    apiKey: "AIzaSyAW9iDg7L88N6BeQHQgzphYIadZrAXjUlY",
-    authDomain: 'contact-list-2304e.firebaseio.com',
-    databaseURL: 'https://contact-list-2304e.firebaseio.com',
-    storageBucket: 'contact-list-2304e.appspot.com',
-    messagingSenderId: "98769349109"
-});
+function getProducts() {
+    JSON.parse(localStorage.getItem("products"));
+    var products = JSON.parse(localStorage.getItem("products"));
+    if (products == null) {
+        products = [];
+    }
 
+    return products;
+}
 module.exports = {
     addWorkout: function (workout) {
         var workouts = JSON.parse(localStorage.getItem("workouts"));
@@ -20,18 +21,39 @@ module.exports = {
         localStorage.setItem("workouts", JSON.stringify(workouts));
     },
     getProducts: function () {
-        var products = JSON.parse(localStorage.getItem("products"));
-        if (products == null) {
-            products = [];
-        }
+        var products = getProducts();
         AppActions.receivedProducts(products);
     },
     removeProduct: function (id) {
-        var products = JSON.parse(localStorage.getItem("products"));
-        if (products == null) {
-            products = [];
-        }
+        var products = getProducts();
         products = products.filter(t => t.id !== id);
         localStorage.setItem("products", JSON.stringify(products));
     },
+    //get product from server (mockdata)
+    getEditableProduct: function (id) {
+        var products = getProducts();
+        var product = null;
+        console.log("id ="+id);
+        if (id == null) {
+            product = {
+                id: Date.now(),
+                name: '',
+                description: '',
+                price: '',
+                creationDate: moment()
+            }
+        }
+        else {
+            var product = products.find(t => t.id == id);
+            product.creationDate = moment(product.creationDate)
+        }
+
+        console.log("found product");
+        console.log(product);
+        //100 ms to get data from api
+        setTimeout(() => {
+            AppActions.receivedEditableProduct(product);
+        }, 100);
+        return product;
+    }
 }

@@ -9,8 +9,8 @@ export default class AddEditProduct extends React.Component {
 
   constructor(props) {
     super(props);
-    this.onSubmit = this.onSubmit.bind(this);
 
+    this.onSubmit = this.onSubmit.bind(this);
     this.state = {
       errors: {},
       fields: {
@@ -25,8 +25,31 @@ export default class AddEditProduct extends React.Component {
         description: false
       },
     };
+
     this.handleDateChange = this.handleDateChange.bind(this);
     this.handleValidation = this.handleValidation.bind(this);
+  }
+
+  componentDidMount() {
+    var id = null;
+    if (this.props.match.path.indexOf("edit") >= 0) {
+      id = this.props.match.params.id;
+    }
+    AppAcion.getEditableProduct(id);
+  }
+
+  componentWillReceiveProps(nextProps) {
+
+    if (nextProps != null && nextProps.product != null) {
+        this.setState({
+          fields: {
+            "name": nextProps.product.name,
+            "price": nextProps.product.price,
+            "description": nextProps.product.description,
+            "creationDate": moment()
+          }
+        });
+    }
   }
 
   onSubmit(e) {

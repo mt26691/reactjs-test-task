@@ -2,10 +2,12 @@ var appDispatcher = require('../dispatcher/AppDispatcher');
 var AppConstants = require('../constants/AppConstants');
 var EventEmiiter = require('events').EventEmitter;
 var assign = require("object-assign");
+import moment from 'moment';
 
 var AppApi = require('../utils/AppApi');
 
 var CHANGE_EVENT = 'change';
+var currentProduct = null;
 var products = [];
 
 var _showForm = true;
@@ -13,11 +15,15 @@ var AppStore = assign({}, EventEmiiter.prototype, {
     addProduct: function (product) {
         products.push(product);
     },
+    setEditableProduct: function (product) {
+        currentProduct = product;
+    },
+    getEditableProduct: function (id) {
+        console.log("get editable product")
+        return currentProduct;
+    },
     showForm: function () {
         _showForm = true;
-    },
-    getShowForm: function () {
-        return _showForm;
     },
     removeProduct: function (id) {
         products = products.filter(t => t.id !== id);
@@ -50,12 +56,19 @@ AppStore.dispatcherIndex = appDispatcher.register(function (payload) {
             AppStore.addProduct(action.product);
             // AppApi.addProduct(action.workout);
             break;
-        case AppConstants.RECEIVED_WORKOUTS:
+        case AppConstants.RECEIVED_PRODUCTS:
             AppStore.setProducts(action.products);
             break;
         case AppConstants.DELETE_PRODUCT:
             AppStore.removeProduct(action.id);
             AppApi.removeProduct(action.id);
+            break;
+        case AppConstants.GET_EDITABLE_PRODUCT:
+            AppApi.getEditableProduct(action.id);
+            break;
+        case AppConstants.RECEIVED_EDITABLEPRODUCT:
+            console.log("set editable product")
+            AppStore.setEditableProduct(action.product);
             break;
         default:
             return true;

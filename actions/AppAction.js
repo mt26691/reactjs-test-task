@@ -2,9 +2,10 @@ var appDispatcher = require('../dispatcher/AppDispatcher');
 var AppConstants = require('../constants/AppConstants');
 
 var AppActions = {
-    showForm: function () {
+    getEditableProduct: function (id) {
         appDispatcher.handleViewAction({
-            actionType: AppConstants.SHOW_FORM
+            actionType: AppConstants.GET_EDITABLE_PRODUCT,
+            id: id
         })
     },
     addProduct: function (product) {
@@ -15,8 +16,14 @@ var AppActions = {
     },
     receivedProducts: function (products) {
         appDispatcher.handleViewAction({
-            actionType: AppConstants.RECEIVED_WORKOUTS,
+            actionType: AppConstants.RECEIVED_PRODUCTS,
             products: products
+        })
+    },
+    receivedEditableProduct: function (product) {
+        appDispatcher.handleViewAction({
+            actionType: AppConstants.RECEIVED_EDITABLEPRODUCT,
+            product: product
         })
     },
     deleteProduct: function (id) {
