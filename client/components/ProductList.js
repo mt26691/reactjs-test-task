@@ -5,6 +5,7 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import AppAcion from '../../actions/AppAction';
 import Product from './Product';
+import { Link } from 'react-router-dom';
 
 export default class ProductList extends React.Component {
 
@@ -17,6 +18,12 @@ export default class ProductList extends React.Component {
   render() {
     return (
       <div>
+        <h1 className="text-center page-header">
+          Product Lists
+        </h1>
+        <div className="col-md-2 col-md-offset-8">
+          <Link className="nav-link" to={"add"} className="btn btn-primary">ADD Product</Link>
+        </div>
         <table className="table table-striped">
           <thead>
             <tr>

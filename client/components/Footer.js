@@ -9,7 +9,7 @@ export default class Footer extends React.Component {
     return (
       <footer>
         <hr/>
-        <p className="pull-right">ReactJS Test task</p>
+        <h3 className="pull-right">ReactJS Test task</h3>
       </footer>
     );
   }
