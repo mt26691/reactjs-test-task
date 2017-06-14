@@ -11,7 +11,6 @@ import initData from '../utils/InitData';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 initData();
-AppApi.getProducts();
 
 import { createBrowserHistory } from 'history'
 const history = createBrowserHistory()

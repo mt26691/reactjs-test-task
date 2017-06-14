@@ -18,8 +18,8 @@ var AppStore = assign({}, EventEmiiter.prototype, {
     setEditableProduct: function (product) {
         currentProduct = product;
     },
-    getEditableProduct: function (id) {
-        console.log("get editable product")
+    getEditableProduct: function () {
+        console.log(currentProduct);
         return currentProduct;
     },
     showForm: function () {
@@ -49,12 +49,11 @@ AppStore.dispatcherIndex = appDispatcher.register(function (payload) {
     var action = payload.action;
 
     switch (action.actionType) {
-        case AppConstants.SHOW_FORM:
-            AppStore.showForm();
+        case AppConstants.GET_PRODUCTS:
+            AppApi.getProducts();
             break;
         case AppConstants.SAVE_PRODUCT:
-        console.log("1");
-            // AppStore.saveProduct(action.product);
+            AppStore.setEditableProduct(action.product);
             AppApi.saveProduct(action.product);
             break;
         case AppConstants.RECEIVED_PRODUCTS:
@@ -68,7 +67,6 @@ AppStore.dispatcherIndex = appDispatcher.register(function (payload) {
             AppApi.getEditableProduct(action.id);
             break;
         case AppConstants.RECEIVED_EDITABLEPRODUCT:
-            console.log("set editable product")
             AppStore.setEditableProduct(action.product);
             break;
         default:

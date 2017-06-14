@@ -15,24 +15,31 @@ function saveProducts(products) {
 
 module.exports = {
     saveProduct: function (product) {
+        var newProduct = Object.assign({}, product);
+
         var products = getProducts();
-        var existProductIndex = products.findIndex(t => t.id == product.id);
+        var existProductIndex = products.findIndex(t => t.id == newProduct.id);
+        newProduct.creationDate = newProduct.creationDate.format('YYYY-MM-DD')
         if (existProductIndex >= 0) {
-            products.splice(existProductIndex, 1, product);
+            products.splice(existProductIndex, 1, newProduct);
         }
         else {
-            products.push(product);
+            products.push(newProduct);
         }
         saveProducts(products);
+        console.log(product);
     },
     getProducts: function () {
         var products = getProducts();
-        AppActions.receivedProducts(products);
+        //get product from api async
+        setTimeout(() => {
+            AppActions.receivedProducts(products);
+        }, 100);
     },
     removeProduct: function (id) {
         var products = getProducts();
         products = products.filter(t => t.id !== id);
-        localStorage.setItem("products", JSON.stringify(products));
+        saveProducts(products);
     },
     //get product from server (mockdata)
     getEditableProduct: function (id) {

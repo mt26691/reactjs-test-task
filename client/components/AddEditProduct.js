@@ -61,7 +61,7 @@ export default class AddEditProduct extends React.Component {
           name: this.state.fields.name,
           price: this.state.fields.price,
           description: this.state.fields.description,
-          creationDate: this.state.fields.creationDate.format('YYYY-MM-DD')
+          creationDate: this.state.fields.creationDate
         }
       AppAcion.saveProduct(product);
     }

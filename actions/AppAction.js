@@ -14,6 +14,11 @@ var AppActions = {
             product: product
         })
     },
+    getProducts: function () {
+        appDispatcher.handleViewAction({
+            actionType: AppConstants.GET_PRODUCTS
+        })
+    },
     receivedProducts: function (products) {
         appDispatcher.handleViewAction({
             actionType: AppConstants.RECEIVED_PRODUCTS,

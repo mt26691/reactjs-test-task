@@ -10,10 +10,11 @@ export default class Product extends React.Component {
     this.onDelete = this.onDelete.bind(this);
   }
 
+  
   onDelete() {
     AppAcion.deleteProduct(this.props.product.id);
   }
-  
+
   render() {
     const editLink = `/edit/${this.props.product.id}`
     return (
