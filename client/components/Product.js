@@ -8,6 +8,7 @@ export default class Product extends React.Component {
     super(props);
     this.onDelete = this.onDelete.bind(this);
   }
+  
   onDelete() {
     AppAcion.deleteProduct(this.props.product.id);
   }
@@ -19,7 +20,7 @@ export default class Product extends React.Component {
         <td>{this.props.product.id}</td>
         <td>{this.props.product.name}</td>
         <td>{this.props.product.price}</td>
-        <td>Creation date</td>
+        <td>{this.props.product.creationDate}</td>
         <td>
           <a className="btn btn-info" href={editLink} onClick={this.onDelete}>Edit</a>
         </td>

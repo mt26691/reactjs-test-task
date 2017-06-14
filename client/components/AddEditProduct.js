@@ -12,10 +12,6 @@ export default class AddEditProduct extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
-      name: '',
-      price: '',
-      description: '',
-      creationDate: moment(),
       errors: {},
       fields: {
         "name": "",
@@ -29,7 +25,6 @@ export default class AddEditProduct extends React.Component {
         description: false
       },
     };
-    this.handleChange = this.handleChange.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
     this.handleValidation = this.handleValidation.bind(this);
   }
@@ -37,45 +32,32 @@ export default class AddEditProduct extends React.Component {
   onSubmit(e) {
     e.preventDefault();
     if (this.handleValidation(true)) {
-      alert("Form submitted");
-    } else {
-      alert("Form has errors.")
+      var product =
+        {
+          name: this.state.fields.name,
+          price: this.state.fields.price,
+          description: this.state.fields.description,
+          creationDate: this.state.fields.creationDate.format('YYYY-MM-DD')
+        }
+      AppAcion.addProduct(product);
     }
-    // if (this.state.name !== '' && this.state.price !== '' && this.state.description !== '' && this.state.isValid) {
-    //   var product =
-    //     {
-    //       name: this.state.name,
-    //       price: this.state.price,
-    //       description: this.state.description,
-    //       creationDate: this.state.creationDate.format('YYYY-MM-DD')
-    //     }
-    //   AppAcion.addProduct(product);
-    // }
-  }
-
-  handleChange(e) {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-
   }
 
   handleDateChange(date) {
+    let fields = this.state.fields;
+    fields["creationDate"] = date;
     this.setState({
-      creationDate: date
+      fields
     });
-
   }
 
-  handleChange1(field, e) {
+  handleChange(field, e) {
     let fields = this.state.fields;
     fields[field] = e.target.value;
-    this.setState({ fields });
-    var touch = Object.assign({}, this.state.touched);
-    touch[field] = true;
-    this.setState({
-      touched: touch,
-    });
+    let touched = this.state.touched;
+    touched[field] = true;
+
+    this.setState({ fields, touched });
 
     this.handleValidation();
   }
@@ -86,48 +68,32 @@ export default class AddEditProduct extends React.Component {
     let formIsValid = true;
 
     if ((isValidateAnyway === false && this.state.touched.name === true) || isValidateAnyway) {
-      if (typeof fields["name"] !== "undefined") {
-        if (fields["name"].trim() === "") {
-          formIsValid = false;
-          errors["name"] = "Name is required";
-        }
+      if (fields["name"].trim() === "") {
+        formIsValid = false;
+        errors["name"] = "Name is required";
       }
     }
 
     if ((isValidateAnyway === false && this.state.touched.price === true) || isValidateAnyway) {
-      if (typeof fields["price"] !== "undefined") {
-        if (fields["price"].trim() === "") {
-          formIsValid = false;
-          errors["price"] = "Price is required";
-        }
-        else if (isNaN(fields["price"])) {
-          formIsValid = false;
-          errors["price"] = "Price should be a number";
-        }
+      if (fields["price"].trim() === "") {
+        formIsValid = false;
+        errors["price"] = "Price is required";
+      }
+      else if (isNaN(fields["price"])) {
+        formIsValid = false;
+        errors["price"] = "Price should be a number";
       }
     }
 
     if ((isValidateAnyway === false && this.state.touched.description === true) || isValidateAnyway) {
-      if (typeof fields["description"] !== "undefined") {
-        if (fields["description"].trim() === "") {
-          formIsValid = false;
-          errors["description"] = "description is required";
-        }
-
+      if (fields["description"].trim() === "") {
+        formIsValid = false;
+        errors["description"] = "Description is required";
       }
     }
 
     this.setState({ errors: errors });
     return formIsValid;
-  }
-
-  validatePrice(value) {
-    // regex from http://stackoverflow.com/questions/46155/validate-email-address-in-javascript
-    if (value === null || value === undefined || value.trim == "" || isNaN(value)) {
-      return false;
-    }
-    return true;
-
   }
 
   render() {
@@ -139,57 +105,26 @@ export default class AddEditProduct extends React.Component {
             <div className="form-group">
               <label>Name</label>
               <input type="text" className="form-control"
-                placeholder="Name" onChange={this.handleChange1.bind(this, "name")} value={this.state.fields["name"]} />
+                placeholder="Name" onChange={this.handleChange.bind(this, "name")} value={this.state.fields["name"]} />
               <span className="input-error">{this.state.errors["name"]}</span>
             </div>
             <div className="form-group">
               <label>Price</label>
               <input type="text" className="form-control"
-                placeholder="Price" onChange={this.handleChange1.bind(this, "price")} value={this.state.fields["price"]} />
+                placeholder="Price" onChange={this.handleChange.bind(this, "price")} value={this.state.fields["price"]} />
               <span className="input-error">{this.state.errors["price"]}</span>
             </div>
             <div className="form-group">
               <label>Price</label>
               <textarea
                 className="form-control"
-                placeholder="Description" onChange={this.handleChange1.bind(this, "description")} value={this.state.fields["description"]}></textarea>
+                placeholder="Description" onChange={this.handleChange.bind(this, "description")} value={this.state.fields["description"]}></textarea>
               <span className="input-error">{this.state.errors["description"]}</span>
             </div>
-            {/*<TextInput
-              onChange={this.handleChange}
-              name="name"
-              label="Name"
-              placeholder="Please enter Name"
-              value=""
-              type="text"
-              required={true}
-              errorMessage="Name is invalid"
-              emptyMessage="Name is required" />
-            <TextInput
-              onChange={this.handleChange}
-              name="price"
-              label="Price"
-              placeholder="Please enter Price"
-              value=""
-              type="text"
-              required={true}
-              validate={this.validatePrice}
-              errorMessage="Price is invalid"
-              emptyMessage="Price is required" />
-            <TextInput
-              onChange={this.handleChange}
-              name="description"
-              label="Description"
-              placeholder="Please enter description"
-              value=""
-              type="textarea"
-              required={true}
-              errorMessage="Description is invalid"
-              emptyMessage="Description is required" />*/}
             <div className="form-group">
               <label>Creation Date</label>
               <DatePicker
-                selected={this.state.creationDate}
+                selected={this.state.fields.creationDate}
                 onChange={this.handleDateChange}
                 dateFormat="YYYY/MM/DD"
                 className="form-control" placeholderText="Click to select a date" />
