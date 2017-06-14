@@ -68,7 +68,11 @@ class App extends React.Component {
                     products={this.state.products}
                   />
                 )} />
+
                 <Route exact path="/add" render={() => (
+                  <AddEditProduct />
+                )} />
+                <Route exact path="/edit/:id" render={() => (
                   <AddEditProduct />
                 )} />
               </Switch>
