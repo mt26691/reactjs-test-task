@@ -38,5 +38,7 @@ var data = [
 ]
 
 export default function initData() {
-	localStorage.setItem("products", JSON.stringify(data));
+	if (localStorage.getItem("products") == null) {
+		localStorage.setItem("products", JSON.stringify(data));
+	}
 }

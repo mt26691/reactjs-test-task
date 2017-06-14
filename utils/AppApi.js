@@ -2,23 +2,28 @@ var AppActions = require("../actions/AppAction");
 import moment from 'moment';
 
 function getProducts() {
-    JSON.parse(localStorage.getItem("products"));
     var products = JSON.parse(localStorage.getItem("products"));
     if (products == null) {
         products = [];
     }
-
+    console.log(products);
     return products;
 }
+function saveProducts(products) {
+    localStorage.setItem("products", JSON.stringify(products));
+}
+
 module.exports = {
-    addWorkout: function (workout) {
-        var workouts = JSON.parse(localStorage.getItem("workouts"));
-        if (workouts == null) {
-            workouts = [];
+    saveProduct: function (product) {
+        var products = getProducts();
+        var existProductIndex = products.findIndex(t => t.id == product.id);
+        if (existProductIndex >= 0) {
+            products.splice(existProductIndex, 1, product);
         }
-        workouts.push(workout);
-        console.log(workouts);
-        localStorage.setItem("workouts", JSON.stringify(workouts));
+        else {
+            products.push(product);
+        }
+        saveProducts(products);
     },
     getProducts: function () {
         var products = getProducts();
@@ -33,7 +38,6 @@ module.exports = {
     getEditableProduct: function (id) {
         var products = getProducts();
         var product = null;
-        console.log("id ="+id);
         if (id == null) {
             product = {
                 id: Date.now(),
@@ -47,9 +51,6 @@ module.exports = {
             var product = products.find(t => t.id == id);
             product.creationDate = moment(product.creationDate)
         }
-
-        console.log("found product");
-        console.log(product);
         //100 ms to get data from api
         setTimeout(() => {
             AppActions.receivedEditableProduct(product);

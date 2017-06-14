@@ -12,7 +12,7 @@ var products = [];
 
 var _showForm = true;
 var AppStore = assign({}, EventEmiiter.prototype, {
-    addProduct: function (product) {
+    saveProduct: function (product) {
         products.push(product);
     },
     setEditableProduct: function (product) {
@@ -52,9 +52,10 @@ AppStore.dispatcherIndex = appDispatcher.register(function (payload) {
         case AppConstants.SHOW_FORM:
             AppStore.showForm();
             break;
-        case AppConstants.ADD_PRODUCT:
-            AppStore.addProduct(action.product);
-            // AppApi.addProduct(action.workout);
+        case AppConstants.SAVE_PRODUCT:
+        console.log("1");
+            // AppStore.saveProduct(action.product);
+            AppApi.saveProduct(action.product);
             break;
         case AppConstants.RECEIVED_PRODUCTS:
             AppStore.setProducts(action.products);

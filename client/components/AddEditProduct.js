@@ -46,7 +46,7 @@ export default class AddEditProduct extends React.Component {
             "name": nextProps.product.name,
             "price": nextProps.product.price,
             "description": nextProps.product.description,
-            "creationDate": moment()
+            "creationDate": nextProps.product.creationDate
           }
         });
     }
@@ -57,12 +57,13 @@ export default class AddEditProduct extends React.Component {
     if (this.handleValidation(true)) {
       var product =
         {
+          id:this.props.product.id,
           name: this.state.fields.name,
           price: this.state.fields.price,
           description: this.state.fields.description,
           creationDate: this.state.fields.creationDate.format('YYYY-MM-DD')
         }
-      AppAcion.addProduct(product);
+      AppAcion.saveProduct(product);
     }
   }
 
@@ -98,7 +99,7 @@ export default class AddEditProduct extends React.Component {
     }
 
     if ((isValidateAnyway === false && this.state.touched.price === true) || isValidateAnyway) {
-      if (fields["price"].trim() === "") {
+      if (fields["price"] === "") {
         formIsValid = false;
         errors["price"] = "Price is required";
       }
@@ -138,7 +139,7 @@ export default class AddEditProduct extends React.Component {
               <span className="input-error">{this.state.errors["price"]}</span>
             </div>
             <div className="form-group">
-              <label>Price</label>
+              <label>Description</label>
               <textarea
                 className="form-control"
                 placeholder="Description" onChange={this.handleChange.bind(this, "description")} value={this.state.fields["description"]}></textarea>

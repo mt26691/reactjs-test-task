@@ -8,9 +8,9 @@ var AppActions = {
             id: id
         })
     },
-    addProduct: function (product) {
+    saveProduct: function (product) {
         appDispatcher.handleViewAction({
-            actionType: AppConstants.ADD_PRODUCT,
+            actionType: AppConstants.SAVE_PRODUCT,
             product: product
         })
     },
