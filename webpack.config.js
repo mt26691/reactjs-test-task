@@ -26,11 +26,5 @@ module.exports = {
       }
     ]
   },
-  resolve: {
-    modules: ['node_modules', 'src'],
-    alias: {
-      'react-datepicker': path.join(__dirname, '/react-datepicker')
-    }
-  },
   plugins: [HtmlWebpackPluginConfig]
 }

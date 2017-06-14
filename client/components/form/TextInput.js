@@ -74,12 +74,15 @@ export default class TextInput extends React.Component {
 			errorMessage: message,
 			errorVisible: errorVisible
 		});
+		if(this.props.validateResult != null)
 		
+		this.props.validateResult(valid);
+
 	}
 
 	handleBlur(event) {
 		//Complete final validation from parent element when complete
-		var valid = this.props.validate == null ? true : this.props.validate(event.target.value);
+		var valid = this.props.validate == null ? true: this.props.validate(event.target.value);
 		//pass the result to the local validation element for displaying the error
 		this.validation(event.target.value, valid);
 	}
