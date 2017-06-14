@@ -20,8 +20,17 @@ module.exports = {
   module: {
     loaders: [
       { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
-      { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ }
+      { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ },
+      {
+        test: /\.css$/, loader: 'style!css', include: /node_modules/,
+      }
     ]
+  },
+  resolve: {
+    modules: ['node_modules', 'src'],
+    alias: {
+      'react-datepicker': path.join(__dirname, '/react-datepicker')
+    }
   },
   plugins: [HtmlWebpackPluginConfig]
 }

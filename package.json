@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "connected-react-router": "^4.2.1",
+    "css-loader": "^0.28.4",
     "firebase": "^4.1.1",
     "flux": "^3.1.2",
     "history": "^4.6.2",
@@ -12,10 +13,12 @@
     "path": "^0.12.7",
     "prop-types": "^15.5.10",
     "react": "^15.5.4",
+    "react-datepicker": "^0.47.0",
     "react-dom": "^15.5.4",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
     "reactify": "^1.1.1",
+    "style-loader": "^0.18.2",
     "vinyl-source-stream": "^1.1.0",
     "webpack": "^2.6.1",
     "webpack-dev-server": "^2.4.5"

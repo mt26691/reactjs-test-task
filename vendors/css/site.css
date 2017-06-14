@@ -6,3 +6,7 @@ body
 {
   color:red;
 }
+.react-datepicker__input-container
+{
+  width: 100% !important;
+}
