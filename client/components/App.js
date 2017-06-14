@@ -5,6 +5,8 @@ import { Link, Route, Switch } from 'react-router-dom';
 
 import ProductList from './ProductList';
 import AddEditProduct from './AddEditProduct';
+import ViewProduct from './ViewProduct';
+
 import Header from './Header';
 import Footer from './Footer';
 
@@ -53,6 +55,9 @@ class App extends React.Component {
                 )} />
                 <Route exact path="/edit/:id" render={(routeProps) => (
                   <AddEditProduct {...routeProps} product={this.state.editableProduct} />
+                )} />
+                 <Route exact path="/view/:id" render={(routeProps) => (
+                  <ViewProduct {...routeProps} product={this.state.editableProduct} />
                 )} />
               </Switch>
             </div>
