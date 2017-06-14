@@ -48,9 +48,12 @@ class App extends React.Component {
             <div className="col-md-8 col-md-offset-2">
               <Switch>
                 <Route exact path="/" render={() => (
-                  <ProductList
-                    products={this.state.products}
-                  />
+                  <div>
+                    <ProductList
+                      products={this.state.products}
+                    />
+                    <AddEditProduct />
+                  </div>
                 )} />
 
                 <Route exact path="/add" render={() => (

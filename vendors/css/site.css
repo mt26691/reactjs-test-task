@@ -2,3 +2,7 @@ body
 {
   padding:50px;
 }
+.input-error
+{
+  color:red;
+}
