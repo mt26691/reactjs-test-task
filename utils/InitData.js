@@ -1,3 +1,5 @@
+import AppConstants from '../constants/AppConstants';
+
 
 var data = [
 	{
@@ -38,7 +40,7 @@ var data = [
 ]
 
 export default function initData() {
-	if (localStorage.getItem("products") == null) {
-		localStorage.setItem("products", JSON.stringify(data));
+	if (localStorage.getItem(AppConstants.PRODUCTS_STORAGE) === null || localStorage.getItem(AppConstants.PRODUCTS_STORAGE) === undefined) {
+		localStorage.setItem(AppConstants.PRODUCTS_STORAGE, JSON.stringify(data));
 	}
 }

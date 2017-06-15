@@ -29,7 +29,7 @@ export default class Product extends React.Component {
            <Link to={viewLink} className="btn btn-info" >View</Link>
         </td>
         <td>
-          <Link to={editLink} className="btn btn-info" >Edit</Link>
+          <Link to={editLink} className="btn btn-warning" >Edit</Link>
         </td>
         <td>
           <a className="btn btn-danger" href="#" onClick={this.onDelete}>Delete</a>

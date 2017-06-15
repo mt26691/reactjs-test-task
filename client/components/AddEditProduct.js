@@ -4,6 +4,7 @@ import AppAcion from '../../actions/AppAction';
 import TextInput from './form/TextInput';
 import moment from 'moment';
 import DateInput from './form/DateInput';
+import AppConstants from '../../constants/AppConstants';
 
 export default class AddEditProduct extends React.Component {
 
@@ -154,7 +155,7 @@ export default class AddEditProduct extends React.Component {
             selected={this.state.fields.creationDate}
             onChange={this.handleDateChange}
             maxDate={moment()}
-            dateFormat="YYYY-MM-DD"
+            dateFormat={AppConstants.DEFAULT_DATE_FORMAT}
             label="Creation Date"
             className="form-control date-picker-input"
             placeholderText="Click to select a date"

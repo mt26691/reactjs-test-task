@@ -1,15 +1,17 @@
 var AppActions = require("../actions/AppAction");
+import AppConstants from '../constants/AppConstants';
+
 import moment from 'moment';
 
 function getProducts() {
-    var products = JSON.parse(localStorage.getItem("products"));
+    var products = JSON.parse(localStorage.getItem(AppConstants.PRODUCTS_STORAGE));
     if (products == null) {
         products = [];
     }
     return products;
 }
 function saveProducts(products) {
-    localStorage.setItem("products", JSON.stringify(products));
+    localStorage.setItem(AppConstants.PRODUCTS_STORAGE, JSON.stringify(products));
 }
 
 module.exports = {

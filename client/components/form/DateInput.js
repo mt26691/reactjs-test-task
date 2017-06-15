@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import moment from 'moment';
 import DatePicker from 'react-datepicker';
+import AppConstants from '../../../constants/AppConstants';
 
 export default class TextInput extends React.Component {
 
@@ -24,6 +25,7 @@ export default class TextInput extends React.Component {
 
 
 	render() {
+		var dateFormat = this.props.dateFormat == null ? AppConstants.DEFAULT_DATE_FORMAT : this.props.dateFormat;
 		return (
 			<div className="form-group">
 				<label>{this.props.label}</label>
@@ -32,7 +34,7 @@ export default class TextInput extends React.Component {
 					onChange={this.handleChange}
 					readOnly="readonly"
 					maxDate={this.props.maxDate}
-					dateFormat={this.props.dateFormat}
+					dateFormat={dateFormat}
 					showYearDropdown
 					scrollableYearDropdown
 					className={this.props.className} placeholderText={this.props.placeholderText} />
