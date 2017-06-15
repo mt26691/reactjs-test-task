@@ -118,9 +118,15 @@ export default class AddEditProduct extends React.Component {
   }
 
   render() {
+    var isEdit = this.props.match.path.indexOf("edit") >= 0;
     return (
       <div>
-        <h3>Add a Product</h3>
+        {
+          !isEdit && <h3>Add a Product</h3>
+        }
+        {
+          isEdit && <h3>Edit a Product</h3>
+        }
         <form onSubmit={this.onSubmit}>
           <TextInput
             label={"Name"}
