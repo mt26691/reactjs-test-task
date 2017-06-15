@@ -159,6 +159,10 @@ export default class AddEditProduct extends React.Component {
             className="form-control date-picker-input"
             placeholderText="Click to select a date"
           />
+          {
+            this.props.saveStatus && <div className="form-group alert alert-success">Product is saved!</div>
+          }
+
           <button className="btn btn-info btn-block" type="submit">Save</button>
         </form>
       </div>

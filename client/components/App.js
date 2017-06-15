@@ -16,7 +16,8 @@ var appStore = require("../../stores/AppStore");
 function getAppState() {
   return {
     products: appStore.getProducts(),
-    editableProduct: appStore.getEditableProduct()
+    editableProduct: appStore.getEditableProduct(),
+    saveStatus:appStore.getSaveStatus()
   };
 }
 class App extends React.Component {
@@ -51,13 +52,13 @@ class App extends React.Component {
                 )} />
 
                 <Route exact path="/add" render={(routeProps) => (
-                  <AddEditProduct {...routeProps} product={this.state.editableProduct} />
+                  <AddEditProduct {...routeProps} product={this.state.editableProduct} saveStatus={this.state.saveStatus} />
                 )} />
                 <Route exact path="/edit/:id" render={(routeProps) => (
-                  <AddEditProduct {...routeProps} product={this.state.editableProduct} />
+                  <AddEditProduct {...routeProps} product={this.state.editableProduct} saveStatus={this.state.saveStatus}/>
                 )} />
                  <Route exact path="/view/:id" render={(routeProps) => (
-                  <ViewProduct {...routeProps} product={this.state.editableProduct} />
+                  <ViewProduct {...routeProps} product={this.state.editableProduct} saveStatus={this.state.saveStatus} />
                 )} />
               </Switch>
             </div>

@@ -14,6 +14,11 @@ var AppActions = {
             product: product
         })
     },
+    saveSuccessfully: function () {
+        appDispatcher.handleViewAction({
+            actionType: AppConstants.SAVE_SUCCESSFULLY
+        })
+    },
     getProducts: function () {
         appDispatcher.handleViewAction({
             actionType: AppConstants.GET_PRODUCTS

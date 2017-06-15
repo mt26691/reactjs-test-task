@@ -26,6 +26,9 @@ module.exports = {
             products.push(newProduct);
         }
         saveProducts(products);
+        setTimeout(() => {
+            AppActions.saveSuccessfully();
+        }, 100);
     },
     getProducts: function () {
         var products = getProducts();

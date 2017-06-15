@@ -9,6 +9,7 @@ var AppApi = require('../utils/AppApi');
 var CHANGE_EVENT = 'change';
 var currentProduct = null;
 var products = [];
+var saveStatus = false;
 
 var _showForm = true;
 var AppStore = assign({}, EventEmiiter.prototype, {
@@ -17,6 +18,12 @@ var AppStore = assign({}, EventEmiiter.prototype, {
     },
     setEditableProduct: function (product) {
         currentProduct = product;
+    },
+    setSaveStatus: function (status) {
+        saveStatus = status;
+    },
+    getSaveStatus: function () {
+        return saveStatus;
     },
     getEditableProduct: function () {
         return currentProduct;
@@ -58,12 +65,16 @@ AppStore.dispatcherIndex = appDispatcher.register(function (payload) {
         case AppConstants.RECEIVED_PRODUCTS:
             AppStore.setProducts(action.products);
             break;
+        case AppConstants.SAVE_SUCCESSFULLY:
+            AppStore.setSaveStatus(true);
+            break;
         case AppConstants.DELETE_PRODUCT:
             AppStore.removeProduct(action.id);
             AppApi.removeProduct(action.id);
             break;
         case AppConstants.GET_EDITABLE_PRODUCT:
             AppApi.getEditableProduct(action.id);
+            AppStore.setSaveStatus(false);
             break;
         case AppConstants.RECEIVED_EDITABLEPRODUCT:
             AppStore.setEditableProduct(action.product);
