@@ -1,10 +1,9 @@
 import React from 'react';
-import ReactDom from 'react-dom';
-import AppAcion from '../../actions/AppAction';
+import AppAcion from '../actions/AppAction';
 import TextInput from './form/TextInput';
 import moment from 'moment';
 import DateInput from './form/DateInput';
-import AppConstants from '../../constants/AppConstants';
+import AppConstants from '../constants/AppConstants';
 
 export default class AddEditProduct extends React.Component {
 

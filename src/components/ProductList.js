@@ -1,17 +1,12 @@
-/*
-    ./client/components/App.jsx
-*/
+
 import React from 'react';
-import ReactDom from 'react-dom';
-import AppAcion from '../../actions/AppAction';
+import AppAcion from '../actions/AppAction';
 import Product from './Product';
 import { Link } from 'react-router-dom';
 
 export default class ProductList extends React.Component {
 
-  constructor(props) {
-    super(props);
-  }
+ 
 
   componentDidMount() {
     AppAcion.getProducts();

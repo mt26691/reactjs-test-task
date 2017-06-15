@@ -1,9 +1,8 @@
 
 import React from 'react';
-import ReactDom from 'react-dom';
-import moment from 'moment';
 import DatePicker from 'react-datepicker';
-import AppConstants from '../../../constants/AppConstants';
+import AppConstants from '../../constants/AppConstants';
+import 'react-datepicker/dist/react-datepicker.css';
 
 export default class TextInput extends React.Component {
 

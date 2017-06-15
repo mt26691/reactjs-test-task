@@ -1,7 +1,5 @@
 import React from 'react';
-import ReactDom from 'react-dom';
-import PropTypes from 'prop-types';
-import { Link, Route, Switch } from 'react-router-dom';
+import {  Route, Switch } from 'react-router-dom';
 
 import ProductList from './ProductList';
 import AddEditProduct from './AddEditProduct';
@@ -10,8 +8,7 @@ import ViewProduct from './ViewProduct';
 import Header from './Header';
 import Footer from './Footer';
 
-var appActions = require('../../actions/AppAction');
-var appStore = require("../../stores/AppStore");
+var appStore = require("../stores/AppStore");
 
 function getAppState() {
   return {

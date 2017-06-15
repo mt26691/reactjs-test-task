@@ -1,7 +1,6 @@
-var AppActions = require("../actions/AppAction");
-import AppConstants from '../constants/AppConstants';
-
-import moment from 'moment';
+var AppConstants = require('../constants/AppConstants');
+var moment = require('moment');
+var AppActions = require('../actions/AppAction');
 
 function getProducts() {
     var products = JSON.parse(localStorage.getItem(AppConstants.PRODUCTS_STORAGE));
@@ -58,7 +57,7 @@ module.exports = {
             }
         }
         else {
-            var product = products.find(t => t.id == id);
+            product = products.find(t => t.id == id);
             product.creationDate = moment(product.creationDate)
         }
         //100 ms to get data from api

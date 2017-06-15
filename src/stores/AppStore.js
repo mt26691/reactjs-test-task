@@ -2,8 +2,6 @@ var appDispatcher = require('../dispatcher/AppDispatcher');
 var AppConstants = require('../constants/AppConstants');
 var EventEmiiter = require('events').EventEmitter;
 var assign = require("object-assign");
-import moment from 'moment';
-
 var AppApi = require('../utils/AppApi');
 
 var CHANGE_EVENT = 'change';
@@ -11,7 +9,6 @@ var currentProduct = null;
 var products = [];
 var saveStatus = false;
 
-var _showForm = true;
 var AppStore = assign({}, EventEmiiter.prototype, {
     saveProduct: function (product) {
         products.push(product);
@@ -28,9 +25,7 @@ var AppStore = assign({}, EventEmiiter.prototype, {
     getEditableProduct: function () {
         return currentProduct;
     },
-    showForm: function () {
-        _showForm = true;
-    },
+    
     removeProduct: function (id) {
         products = products.filter(t => t.id !== id);
     },

@@ -1,6 +1,5 @@
 
 import React from 'react';
-import ReactDom from 'react-dom';
 
 export default class TextInput extends React.Component {
 
@@ -35,7 +34,7 @@ export default class TextInput extends React.Component {
 	}
 
 	renderControl() {
-		if (this.props.control == null || this.props.control == "text") {
+		if (this.props.control === null || this.props.control === undefined || this.props.control === "text") {
 			return (<input type="text" className="form-control"
 				placeholder={this.props.placeholder} onChange={this.handleChange} value={this.props.value} />);
 		}

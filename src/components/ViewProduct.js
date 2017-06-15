@@ -1,14 +1,9 @@
 import React from 'react';
-import ReactDom from 'react-dom';
-import AppAcion from '../../actions/AppAction';
-import { Link } from 'react-router-dom';
+import AppAcion from '../actions/AppAction';
 
 export default class ViewProduct extends React.Component {
 
-  constructor(props) {
-    super(props);
-  }
-
+  
   componentDidMount() {
     var id = this.props.match.params.id;
     AppAcion.getEditableProduct(id);
