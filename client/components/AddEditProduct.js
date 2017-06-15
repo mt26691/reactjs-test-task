@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import AppAcion from '../../actions/AppAction';
 import TextInput from './form/TextInput';
-import DatePicker from 'react-datepicker';
 import moment from 'moment';
+import DateInput from './form/DateInput';
 
 export default class AddEditProduct extends React.Component {
 
@@ -126,7 +126,7 @@ export default class AddEditProduct extends React.Component {
             label={"Name"}
             placeholder="Please enter name"
             handleChange={this.handleChange.bind(this, "name")}
-            isSubmitted ={this.state.isSubmitted}
+            isSubmitted={this.state.isSubmitted}
             value={this.state.fields["name"]}
             error={this.state.errors["name"]} />
           <TextInput
@@ -134,28 +134,25 @@ export default class AddEditProduct extends React.Component {
             placeholder="Please enter price"
             handleChange={this.handleChange.bind(this, "price")}
             value={this.state.fields["price"]}
-            isSubmitted ={this.state.isSubmitted}
+            isSubmitted={this.state.isSubmitted}
             error={this.state.errors["price"]} />
           <TextInput
             label={"Description"}
+            control="textarea"
             placeholder="Please enter description"
             handleChange={this.handleChange.bind(this, "description")}
             value={this.state.fields["description"]}
-            isSubmitted ={this.state.isSubmitted}
+            isSubmitted={this.state.isSubmitted}
             error={this.state.errors["description"]} />
-          <div className="form-group">
-            <label>Creation Date</label>
-            <DatePicker
-              selected={this.state.fields.creationDate}
-              onChange={this.handleDateChange}
-              readOnly="readonly"
-              maxDate={moment()}
-              dateFormat="YYYY-MM-DD"
-              showYearDropdown
-              scrollableYearDropdown
-              className="form-control date-picker-input" placeholderText="Click to select a date" />
-            <span className="input-error">{this.state.errors["creationDate"]}</span>
-          </div>
+          <DateInput
+            selected={this.state.fields.creationDate}
+            onChange={this.handleDateChange}
+            maxDate={moment()}
+            dateFormat="YYYY-MM-DD"
+            label="Creation Date"
+            className="form-control date-picker-input"
+            placeholderText="Click to select a date"
+          />
           <button className="btn btn-info btn-block" type="submit">Save</button>
         </form>
       </div>

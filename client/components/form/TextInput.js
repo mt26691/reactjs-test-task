@@ -19,22 +19,29 @@ export default class TextInput extends React.Component {
 			this.props.handleChange(event);
 		}
 	}
-	onSubmit(event)
-	{
-		console.log("zzzzzzzzz");
-	}
+
 
 	render() {
 		return (
 			<div className="form-group">
 				<label>{this.props.label}</label>
-				<input type="text" className="form-control"
-					placeholder={this.props.placeholder} onSubmit={this.onSubmit.bind(this)} onChange={this.handleChange} value={this.props.value} />
+				{this.renderControl()}
 				{
 					(this.state.errorVisible || this.props.isSubmitted) &&
 					<span className="input-error">{this.props.error}</span>
 				}
 			</div>
 		);
+	}
+
+	renderControl() {
+		if (this.props.control == null || this.props.control == "text") {
+			return (<input type="text" className="form-control"
+				placeholder={this.props.placeholder} onChange={this.handleChange} value={this.props.value} />);
+		}
+		else if (this.props.control === "textarea") {
+			return (<textarea className="form-control"
+				placeholder={this.props.placeholder} onChange={this.handleChange} value={this.props.value} />);
+		}
 	}
 }
