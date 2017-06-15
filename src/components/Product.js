@@ -34,7 +34,7 @@ export default class Product extends React.Component {
         <td>
           <Confirm
             onConfirm={this.onDelete}
-            body="Do you want to delete this user?"
+            body="Do you want to delete this product?"
             confirmText="Delete"
             title="Delete">
             <button className="btn btn-danger"> Delete</button>
