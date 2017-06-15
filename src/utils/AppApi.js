@@ -58,12 +58,15 @@ module.exports = {
         }
         else {
             product = products.find(t => t.id == id);
-            product.creationDate = moment(product.creationDate)
+            if (product !== null && product !== undefined) {
+                product.creationDate = moment(product.creationDate);
+            }
         }
         //100 ms to get data from api
         setTimeout(() => {
             AppActions.receivedEditableProduct(product);
         }, 100);
+
         return product;
     }
 }

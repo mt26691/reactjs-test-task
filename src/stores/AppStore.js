@@ -8,10 +8,17 @@ var CHANGE_EVENT = 'change';
 var currentProduct = null;
 var products = [];
 var saveStatus = false;
+var productFound = true;
 
 var AppStore = assign({}, EventEmiiter.prototype, {
     saveProduct: function (product) {
         products.push(product);
+    },
+    setProductFound(result) {
+        productFound = result
+    },
+    getProductFound() {
+        return productFound;
     },
     setEditableProduct: function (product) {
         currentProduct = product;
@@ -25,7 +32,7 @@ var AppStore = assign({}, EventEmiiter.prototype, {
     getEditableProduct: function () {
         return currentProduct;
     },
-    
+
     removeProduct: function (id) {
         products = products.filter(t => t.id !== id);
     },
@@ -59,6 +66,7 @@ AppStore.dispatcherIndex = appDispatcher.register(function (payload) {
             break;
         case AppConstants.RECEIVED_PRODUCTS:
             AppStore.setProducts(action.products);
+            AppStore.setProductFound(true);
             break;
         case AppConstants.SAVE_SUCCESSFULLY:
             AppStore.setSaveStatus(true);
@@ -72,7 +80,11 @@ AppStore.dispatcherIndex = appDispatcher.register(function (payload) {
             AppStore.setSaveStatus(false);
             break;
         case AppConstants.RECEIVED_EDITABLEPRODUCT:
+            AppStore.setProductFound(action.product != null);
             AppStore.setEditableProduct(action.product);
+            break;
+        case AppConstants.PRODUCT_NOTFOUND:
+            AppStore.setProductFound(false);
             break;
         default:
             return true;

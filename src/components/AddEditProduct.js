@@ -47,11 +47,17 @@ export default class AddEditProduct extends React.Component {
         }
       });
     }
+    else if (nextProps != null && nextProps.productFound === false) {
+      setTimeout(() => {
+        this.props.history.push("/");
+      }, (10));
+    }
   }
 
   onSubmit(e) {
     e.preventDefault();
     this.setState({ isSubmitted: true });
+
     //if is valid form
     if (this.handleValidation()) {
       var product =
@@ -119,6 +125,7 @@ export default class AddEditProduct extends React.Component {
 
   render() {
     var isEdit = this.props.match.path.indexOf("edit") >= 0;
+
     return (
       <div>
         {

@@ -41,6 +41,11 @@ var AppActions = {
             actionType: AppConstants.DELETE_PRODUCT,
             id: id
         })
+    },
+    productNotFound: function () {
+        appDispatcher.handleViewAction({
+            actionType: AppConstants.PRODUCT_NOTFOUND
+        })
     }
 
 };

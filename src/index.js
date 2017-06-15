@@ -7,6 +7,7 @@ import { createBrowserHistory } from 'history'
 import './vendors/css/bootstrap.css';
 import './vendors/css/site.css';
 const history = createBrowserHistory()
+
 initData();
 
 ReactDOM.render(
