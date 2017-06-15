@@ -20,5 +20,5 @@ To run the project open Command Prompt/Terminal and enter the following command
 npm start 
 ```
 
-## 4/ Tecnologies used
+## 4/ Technologies used
 This project is developed by Reactjs with Flux framework, which is used for managing application's state.
