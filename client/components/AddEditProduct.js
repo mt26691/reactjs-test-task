@@ -41,14 +41,14 @@ export default class AddEditProduct extends React.Component {
   componentWillReceiveProps(nextProps) {
 
     if (nextProps != null && nextProps.product != null) {
-        this.setState({
-          fields: {
-            "name": nextProps.product.name,
-            "price": nextProps.product.price,
-            "description": nextProps.product.description,
-            "creationDate": nextProps.product.creationDate
-          }
-        });
+      this.setState({
+        fields: {
+          "name": nextProps.product.name,
+          "price": nextProps.product.price,
+          "description": nextProps.product.description,
+          "creationDate": nextProps.product.creationDate
+        }
+      });
     }
   }
 
@@ -57,7 +57,7 @@ export default class AddEditProduct extends React.Component {
     if (this.handleValidation(true)) {
       var product =
         {
-          id:this.props.product.id,
+          id: this.props.product.id,
           name: this.state.fields.name,
           price: this.state.fields.price,
           description: this.state.fields.description,
@@ -73,6 +73,7 @@ export default class AddEditProduct extends React.Component {
     this.setState({
       fields
     });
+    this.handleValidation();
   }
 
   handleChange(field, e) {
@@ -116,6 +117,24 @@ export default class AddEditProduct extends React.Component {
       }
     }
 
+
+    if (fields["creationDate"] == null) {
+      formIsValid = false;
+      errors["creationDate"] = "Creation date is required";
+    }
+    else {
+      console.log(fields["creationDate"]);
+      console.log(fields["creationDate"] instanceof moment);
+      if ((fields["creationDate"] instanceof moment) === false) {
+        formIsValid = false;
+        errors["creationDate"] = "Creation date is not valid";
+      }
+      else if (fields["creationDate"].isValid() === false) {
+        formIsValid = false;
+        errors["creationDate"] = "Creation date is not valid";
+      }
+    }
+
     this.setState({ errors: errors });
     return formIsValid;
   }
@@ -123,38 +142,41 @@ export default class AddEditProduct extends React.Component {
   render() {
     return (
       <div>
-        <h5>Add a Product</h5>
+        <h3>Add a Product</h3>
         <form onSubmit={this.onSubmit}>
-          <div className="row">
-            <div className="form-group">
-              <label>Name</label>
-              <input type="text" className="form-control"
-                placeholder="Name" onChange={this.handleChange.bind(this, "name")} value={this.state.fields["name"]} />
-              <span className="input-error">{this.state.errors["name"]}</span>
-            </div>
-            <div className="form-group">
-              <label>Price</label>
-              <input type="text" className="form-control"
-                placeholder="Price" onChange={this.handleChange.bind(this, "price")} value={this.state.fields["price"]} />
-              <span className="input-error">{this.state.errors["price"]}</span>
-            </div>
-            <div className="form-group">
-              <label>Description</label>
-              <textarea
-                className="form-control"
-                placeholder="Description" onChange={this.handleChange.bind(this, "description")} value={this.state.fields["description"]}></textarea>
-              <span className="input-error">{this.state.errors["description"]}</span>
-            </div>
-            <div className="form-group">
-              <label>Creation Date</label>
-              <DatePicker
-                selected={this.state.fields.creationDate}
-                onChange={this.handleDateChange}
-                dateFormat="YYYY/MM/DD"
-                className="form-control" placeholderText="Click to select a date" />
-            </div>
-            <button className="btn btn-info btn-block" type="submit">Save</button>
+          <div className="form-group">
+            <label>Name</label>
+            <input type="text" className="form-control"
+              placeholder="Name" onChange={this.handleChange.bind(this, "name")} value={this.state.fields["name"]} />
+            <span className="input-error">{this.state.errors["name"]}</span>
           </div>
+          <div className="form-group">
+            <label>Price</label>
+            <input type="text" className="form-control"
+              placeholder="Price" onChange={this.handleChange.bind(this, "price")} value={this.state.fields["price"]} />
+            <span className="input-error">{this.state.errors["price"]}</span>
+          </div>
+          <div className="form-group">
+            <label>Description</label>
+            <textarea
+              className="form-control"
+              placeholder="Description" onChange={this.handleChange.bind(this, "description")} value={this.state.fields["description"]}></textarea>
+            <span className="input-error">{this.state.errors["description"]}</span>
+          </div>
+          <div className="form-group">
+            <label>Creation Date</label>
+            <DatePicker
+              selected={this.state.fields.creationDate}
+              onChange={this.handleDateChange}
+              readOnly="readonly"
+              maxDate={moment()}
+              dateFormat="YYYY-MM-DD"
+              showYearDropdown
+              scrollableYearDropdown
+              className="form-control date-picker-input" placeholderText="Click to select a date" />
+            <span className="input-error">{this.state.errors["creationDate"]}</span>
+          </div>
+          <button className="btn btn-info btn-block" type="submit">Save</button>
         </form>
       </div>
     );

@@ -10,3 +10,13 @@ body
 {
   width: 100% !important;
 }
+.date-picker-input
+{
+  cursor: pointer;
+  background-color:#fff !important;
+}
+
+html
+{
+  font-size:15px;
+}
