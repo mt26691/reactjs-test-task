@@ -14,12 +14,13 @@ function saveProducts(products) {
 }
 
 module.exports = {
+    //save product to the database
     saveProduct: function (product) {
         var newProduct = Object.assign({}, product);
 
         var products = getProducts();
         var existProductIndex = products.findIndex(t => t.id == newProduct.id);
-        newProduct.creationDate = newProduct.creationDate.format('YYYY-MM-DD')
+        newProduct.creationDate = newProduct.creationDate.format(AppConstants.DEFAULT_DATE_FORMAT)
         if (existProductIndex >= 0) {
             products.splice(existProductIndex, 1, newProduct);
         }
@@ -31,6 +32,7 @@ module.exports = {
             AppActions.saveSuccessfully();
         }, 100);
     },
+    //get products from database
     getProducts: function () {
         var products = getProducts();
         //get product from api async
@@ -38,6 +40,7 @@ module.exports = {
             AppActions.receivedProducts(products);
         }, 100);
     },
+    //remove product
     removeProduct: function (id) {
         var products = getProducts();
         products = products.filter(t => t.id !== id);

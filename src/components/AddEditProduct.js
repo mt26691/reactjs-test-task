@@ -47,11 +47,7 @@ export default class AddEditProduct extends React.Component {
         }
       });
     }
-    else if (nextProps != null && nextProps.productFound === false) {
-      setTimeout(() => {
-        this.props.history.push("/");
-      }, (10));
-    }
+  
   }
 
   onSubmit(e) {
@@ -125,54 +121,60 @@ export default class AddEditProduct extends React.Component {
 
   render() {
     var isEdit = this.props.match.path.indexOf("edit") >= 0;
-
-    return (
-      <div>
-        {
-          !isEdit && <h3>Add a Product</h3>
-        }
-        {
-          isEdit && <h3>Edit a Product</h3>
-        }
-        <form onSubmit={this.onSubmit}>
-          <TextInput
-            label={"Name"}
-            placeholder="Please enter name"
-            handleChange={this.handleChange.bind(this, "name")}
-            isSubmitted={this.state.isSubmitted}
-            value={this.state.fields["name"]}
-            error={this.state.errors["name"]} />
-          <TextInput
-            label={"Price"}
-            placeholder="Please enter price"
-            handleChange={this.handleChange.bind(this, "price")}
-            value={this.state.fields["price"]}
-            isSubmitted={this.state.isSubmitted}
-            error={this.state.errors["price"]} />
-          <TextInput
-            label={"Description"}
-            control="textarea"
-            placeholder="Please enter description"
-            handleChange={this.handleChange.bind(this, "description")}
-            value={this.state.fields["description"]}
-            isSubmitted={this.state.isSubmitted}
-            error={this.state.errors["description"]} />
-          <DateInput
-            selected={this.state.fields.creationDate}
-            onChange={this.handleDateChange}
-            maxDate={moment()}
-            dateFormat={AppConstants.DEFAULT_DATE_FORMAT}
-            label="Creation Date"
-            className="form-control date-picker-input"
-            placeholderText="Click to select a date"
-          />
+    var product = this.props.product;
+    if (product != null) {
+      return (
+        <div>
           {
-            this.props.saveStatus && <div className="form-group alert alert-success">Product is saved!</div>
+            !isEdit && <h3>Add a Product</h3>
           }
+          {
+            isEdit && <h3>Edit a Product</h3>
+          }
+          <form onSubmit={this.onSubmit}>
+            <TextInput
+              label={"Name"}
+              placeholder="Please enter name"
+              handleChange={this.handleChange.bind(this, "name")}
+              isSubmitted={this.state.isSubmitted}
+              value={this.state.fields["name"]}
+              error={this.state.errors["name"]} />
+            <TextInput
+              label={"Price"}
+              placeholder="Please enter price"
+              handleChange={this.handleChange.bind(this, "price")}
+              value={this.state.fields["price"]}
+              isSubmitted={this.state.isSubmitted}
+              error={this.state.errors["price"]} />
+            <TextInput
+              label={"Description"}
+              control="textarea"
+              placeholder="Please enter description"
+              handleChange={this.handleChange.bind(this, "description")}
+              value={this.state.fields["description"]}
+              isSubmitted={this.state.isSubmitted}
+              error={this.state.errors["description"]} />
+            <DateInput
+              selected={this.state.fields.creationDate}
+              onChange={this.handleDateChange}
+              maxDate={moment()}
+              dateFormat={AppConstants.DEFAULT_DATE_FORMAT}
+              label="Creation Date"
+              className="form-control date-picker-input"
+              placeholderText="Click to select a date"
+            />
+            {
+              this.props.saveStatus && <div className="form-group alert alert-success">Product is saved!</div>
+            }
 
-          <button className="btn btn-info btn-block" type="submit">Save</button>
-        </form>
-      </div>
-    );
+            <button className="btn btn-info btn-block" type="submit">Save</button>
+          </form>
+        </div>
+      );
+    }
+    else
+    {
+      return <h1>Product not found</h1>
+    }
   }
 }

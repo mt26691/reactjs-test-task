@@ -14,8 +14,7 @@ function getAppState() {
   return {
     products: appStore.getProducts(),
     editableProduct: appStore.getEditableProduct(),
-    saveStatus: appStore.getSaveStatus(),
-    productFound:appStore.getProductFound()
+    saveStatus: appStore.getSaveStatus()
   };
 }
 class App extends React.Component {
@@ -69,7 +68,6 @@ class App extends React.Component {
   }
 
   _onChange() {
-    console.log("app state changing");
     this.setState(getAppState());
   }
 }

@@ -1,9 +1,10 @@
 import React from 'react';
 import AppAcion from '../actions/AppAction';
+import AppConstants from '../constants/AppConstants';
 
 export default class ViewProduct extends React.Component {
 
-  
+
   componentDidMount() {
     var id = this.props.match.params.id;
     AppAcion.getEditableProduct(id);
@@ -14,22 +15,30 @@ export default class ViewProduct extends React.Component {
     if (product != null) {
       return (
         <div className="row">
-          <h1>Product Details View</h1>
-          <h2>
-            {product.name}
-          </h2>
-          <h2>
-            {product.price}
-          </h2>
-          <h2>
-            {product.description}
-          </h2>
+          <h2>Product Details</h2>
+          <h3>
+            Name: {product.name}
+          </h3>
+          <h3>
+            Price: {product.price}
+          </h3>
+          <h3>
+            Description: {product.description}
+          </h3>
+          <h3>
+            Creation Date: {product.creationDate.format(AppConstants.DEFAULT_DATE_FORMAT)}
+          </h3>
+          <h3>
+          </h3>
         </div>
       );
     }
     else {
       return (
         <div className="row">
+          <h1>
+            Product Not Found
+          </h1>
         </div>
       );
     }
