@@ -6,7 +6,6 @@ function getProducts() {
     if (products == null) {
         products = [];
     }
-    console.log(products);
     return products;
 }
 function saveProducts(products) {
@@ -27,7 +26,6 @@ module.exports = {
             products.push(newProduct);
         }
         saveProducts(products);
-        console.log(product);
     },
     getProducts: function () {
         var products = getProducts();

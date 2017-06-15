@@ -19,7 +19,6 @@ var AppStore = assign({}, EventEmiiter.prototype, {
         currentProduct = product;
     },
     getEditableProduct: function () {
-        console.log(currentProduct);
         return currentProduct;
     },
     showForm: function () {
