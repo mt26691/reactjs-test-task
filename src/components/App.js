@@ -14,7 +14,8 @@ function getAppState() {
   return {
     products: appStore.getProducts(),
     editableProduct: appStore.getEditableProduct(),
-    saveStatus: appStore.getSaveStatus()
+    saveStatus: appStore.getSaveStatus(),
+    isRemoveProduct: appStore.getIsRemoveProduct()
   };
 }
 class App extends React.Component {
@@ -45,11 +46,12 @@ class App extends React.Component {
                 <Route exact path="/" render={() => (
                   <ProductList
                     products={this.state.products}
+                    {...this.state}
                   />
                 )} />
 
                 <Route exact path="/add" render={(routeProps) => (
-                  <AddEditProduct {...routeProps} product={this.state.editableProduct} {...this.state}/>
+                  <AddEditProduct {...routeProps} product={this.state.editableProduct} {...this.state} />
                 )} />
                 <Route exact path="/edit/:id" render={(routeProps) => (
                   <AddEditProduct {...routeProps} product={this.state.editableProduct} {...this.state} />

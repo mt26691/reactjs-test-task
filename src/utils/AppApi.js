@@ -45,6 +45,11 @@ module.exports = {
         var products = getProducts();
         products = products.filter(t => t.id !== id);
         saveProducts(products);
+        setTimeout(() => {
+            console.log("get product again after deleting");
+            AppActions.getProducts();
+        }, (10));
+
     },
     //get product from server (mockdata)
     getEditableProduct: function (id) {

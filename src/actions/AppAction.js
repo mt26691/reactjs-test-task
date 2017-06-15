@@ -19,9 +19,10 @@ var AppActions = {
             actionType: AppConstants.SAVE_SUCCESSFULLY
         })
     },
-    getProducts: function () {
+    getProducts: function (isReload) {
         appDispatcher.handleViewAction({
-            actionType: AppConstants.GET_PRODUCTS
+            actionType: AppConstants.GET_PRODUCTS,
+            isReload: isReload
         })
     },
     receivedProducts: function (products) {

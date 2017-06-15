@@ -8,7 +8,7 @@ var CHANGE_EVENT = 'change';
 var currentProduct = null;
 var products = [];
 var saveStatus = false;
-
+var isRemoveProduct = false;
 var AppStore = assign({}, EventEmiiter.prototype, {
     saveProduct: function (product) {
         products.push(product);
@@ -26,8 +26,11 @@ var AppStore = assign({}, EventEmiiter.prototype, {
         return currentProduct;
     },
 
-    removeProduct: function (id) {
-        products = products.filter(t => t.id !== id);
+    setIsRemoveProduct: function (data) {
+        isRemoveProduct = data;
+    },
+    getIsRemoveProduct: function () {
+        return isRemoveProduct;
     },
     setProducts: function (newData) {
         products = newData;
@@ -52,6 +55,9 @@ AppStore.dispatcherIndex = appDispatcher.register(function (payload) {
     switch (action.actionType) {
         case AppConstants.GET_PRODUCTS:
             AppApi.getProducts();
+            if (action.isReload) {
+                AppStore.setIsRemoveProduct(false);
+            }
             break;
         case AppConstants.SAVE_PRODUCT:
             AppStore.setEditableProduct(action.product);
@@ -64,7 +70,7 @@ AppStore.dispatcherIndex = appDispatcher.register(function (payload) {
             AppStore.setSaveStatus(true);
             break;
         case AppConstants.DELETE_PRODUCT:
-            AppStore.removeProduct(action.id);
+            AppStore.setIsRemoveProduct(true);
             AppApi.removeProduct(action.id);
             break;
         case AppConstants.GET_EDITABLE_PRODUCT:
