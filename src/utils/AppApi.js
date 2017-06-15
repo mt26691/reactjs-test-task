@@ -19,7 +19,7 @@ module.exports = {
         var newProduct = Object.assign({}, product);
 
         var products = getProducts();
-        var existProductIndex = products.findIndex(t => t.id == newProduct.id);
+        var existProductIndex = products.findIndex(t => t.id === newProduct.id);
         newProduct.creationDate = newProduct.creationDate.format(AppConstants.DEFAULT_DATE_FORMAT)
         if (existProductIndex >= 0) {
             products.splice(existProductIndex, 1, newProduct);
@@ -52,7 +52,7 @@ module.exports = {
         var product = null;
         if (id == null) {
             product = {
-                id: Date.now(),
+                id: (Date.now()).toString(),
                 name: '',
                 description: '',
                 price: '',
@@ -60,7 +60,7 @@ module.exports = {
             }
         }
         else {
-            product = products.find(t => t.id == id);
+            product = products.find(t => t.id === id);
             if (product !== null && product !== undefined) {
                 product.creationDate = moment(product.creationDate);
             }

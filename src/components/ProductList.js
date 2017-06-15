@@ -19,7 +19,7 @@ export default class ProductList extends React.Component {
           Product Lists
         </h1>
         <div className="col-md-2 col-md-offset-8">
-          <Link className="nav-link" to={"add"} className="btn btn-primary">ADD Product</Link>
+          <Link to={"add"} className="btn btn-primary">ADD Product</Link>
         </div>
         <table className="table table-striped">
           <thead>

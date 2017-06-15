@@ -3,38 +3,38 @@ import AppConstants from '../constants/AppConstants';
 
 var data = [
 	{
-		id: 1,
+		id: "1000000000000",
 		price: 1.0,
-		name: 'Test01',
-		description: 'Test01',
+		name: 'Product 01',
+		description: 'Description 01',
 		creationDate: '2017-01-01'
 	},
 	{
-		id: 2,
+		id: "1000000000001",
 		price: 2.0,
-		name: 'Test02',
-		description: 'Test02',
+		name: 'Product 02',
+		description: 'Description 02',
 		creationDate: '2017-01-01'
 	},
 	{
-		id: 3,
+		id: "1000000000002",
 		price: 3.0,
-		name: 'Test03',
-		description: 'Test03',
+		name: 'Product 03',
+		description: 'Description 03',
 		creationDate: '2017-01-01'
 	},
 	{
-		id: 4,
+		id: "1000000000003",
 		price: 4.0,
-		name: 'Test04',
-		description: 'Test04',
+		name: 'Product 04',
+		description: 'Description 04',
 		creationDate: '2017-01-01'
 	},
 	{
-		id: 5,
+		id: "1000000000004",
 		price: 5.0,
-		name: 'Test05',
-		description: 'Test05',
+		name: 'Product 05',
+		description: 'Description 05',
 		creationDate: '2017-01-01'
 	}
 ]
