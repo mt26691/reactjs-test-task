@@ -4238,6 +4238,10 @@ package-json@^2.0.0:
     registry-url "^3.0.3"
     semver "^5.1.0"
 
+paginator@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/paginator/-/paginator-1.0.0.tgz#7565702af9ab9616dca61fc22c70eba2a4357265"
+
 pako@~0.2.0:
   version "0.2.9"
   resolved "https://registry.yarnpkg.com/pako/-/pako-0.2.9.tgz#f3f7522f4ef782348da8161bad9ecfd51bf83a75"
@@ -4857,7 +4861,7 @@ react-dev-utils@^3.0.0:
     strip-ansi "3.0.1"
     text-table "0.2.0"
 
-react-dom@^15.6.1:
+react-dom@^15.0.0, react-dom@^15.6.1:
   version "15.6.1"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.6.1.tgz#2cb0ed4191038e53c209eb3a79a23e2a4cf99470"
   dependencies:
@@ -4876,6 +4880,16 @@ react-error-overlay@^1.0.7:
     react-dev-utils "^3.0.0"
     settle-promise "1.0.0"
     source-map "0.5.6"
+
+react-js-pagination@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/react-js-pagination/-/react-js-pagination-2.1.0.tgz#1bfcd48389cad173ca7300033a5f4d3605db3624"
+  dependencies:
+    classnames "^2.2.5"
+    paginator "^1.0.0"
+    prop-types "^15.5.8"
+    react "^15.0.0"
+    react-dom "^15.0.0"
 
 react-onclickoutside@^5.11.1:
   version "5.11.1"
@@ -4963,7 +4977,7 @@ react-scripts@1.0.7:
   optionalDependencies:
     fsevents "1.0.17"
 
-react@^15.6.1:
+react@^15.0.0, react@^15.6.1:
   version "15.6.1"
   resolved "https://registry.yarnpkg.com/react/-/react-15.6.1.tgz#baa8434ec6780bde997cdc380b79cd33b96393df"
   dependencies:

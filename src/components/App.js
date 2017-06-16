@@ -13,7 +13,7 @@ var appStore = require("../stores/AppStore");
 
 function getAppState() {
   return {
-    products: appStore.getProducts(),
+    productData: appStore.getProducts(),
     editableProduct: appStore.getEditableProduct(),
     saveStatus: appStore.getSaveStatus(),
     isRemoveProduct: appStore.getIsRemoveProduct(),
@@ -45,9 +45,9 @@ class App extends React.Component {
           <div className="row">
             <div className="col-md-8 col-md-offset-2">
               <Switch>
-                <Route exact path="/" render={() => (
+                <Route exact path="/" render={(routeProps) => (
                   <ProductList
-                    products={this.state.products}
+                    {...routeProps}
                     {...this.state}
                   />
                 )} />

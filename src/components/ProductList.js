@@ -1,17 +1,29 @@
 
 import React from 'react';
 import AppAcion from '../actions/AppAction';
+import AppConstants from '../constants/AppConstants';
 import Product from './Product';
 import { Link } from 'react-router-dom';
+import Pagination from "react-js-pagination";
 
 export default class ProductList extends React.Component {
 
+
   componentDidMount() {
-    AppAcion.getProducts(true);
+    let page = AppConstants.DEFAULT_PAGE
+    let pageSize = AppConstants.DEFAULT_PAGESIZE;
+
+    AppAcion.getProducts(true, page, pageSize);
+  }
+
+  onChangePage(pageNumber) {
+    let pageSize = AppConstants.DEFAULT_PAGESIZE;
+    AppAcion.getProducts(true, pageNumber, pageSize);
   }
 
   render() {
-    var productList = this.props.products;
+    var productList = this.props.productData.products;
+    var shouldRenderTable = productList != null && productList.length > 0;
 
     return (
 
@@ -24,7 +36,7 @@ export default class ProductList extends React.Component {
           <Link to={"add"} className="btn btn-primary">ADD Product</Link>
         </div>
         {
-          productList != null && productList.length > 0 &&
+          shouldRenderTable &&
           < table className="table table-striped">
             <thead>
               <tr>
@@ -39,12 +51,18 @@ export default class ProductList extends React.Component {
             </thead>
             <tbody>
               {
-                this.props.products.map((product, index) => {
+                productList.map((product, index) => {
                   return <Product product={product} key={index} />
                 })
               }
             </tbody>
           </table>
+        }
+        {
+          shouldRenderTable &&
+          <Pagination totalItemsCount={this.props.productData.total}
+            activePage={this.props.productData.currentPage}
+            itemsCountPerPage={this.props.productData.pageSize} onChange={this.onChangePage.bind(this)} />
         }
         {
           this.props.isRemoveProduct &&

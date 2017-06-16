@@ -10,6 +10,7 @@
     "react-bootstrap": "^0.31.0",
     "react-datepicker": "^0.47.0",
     "react-dom": "^15.6.1",
+    "react-js-pagination": "^2.1.0",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1"
   },

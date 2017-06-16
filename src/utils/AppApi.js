@@ -33,11 +33,15 @@ module.exports = {
         }, 100);
     },
     //get products from database
-    getProducts: function () {
+    getProducts: function (page = AppConstants.DEFAULT_PAGE, pageSize = AppConstants.DEFAULT_PAGESIZE) {
+        
         var products = getProducts();
+        var startIndex = (page - 1) * pageSize;
         //get product from api async
         setTimeout(() => {
-            AppActions.receivedProducts(products);
+            var total = products.length;
+            products = products.sort((a, b) => a.id - b.id).splice(startIndex, pageSize);
+            AppActions.receivedProducts({ products: products, total: total, currentPage: page, pageSize: pageSize });
         }, 100);
     },
     //remove product
@@ -46,7 +50,6 @@ module.exports = {
         products = products.filter(t => t.id !== id);
         saveProducts(products);
         setTimeout(() => {
-            console.log("get product again after deleting");
             AppActions.getProducts();
         }, (10));
 

@@ -19,16 +19,18 @@ var AppActions = {
             actionType: AppConstants.SAVE_SUCCESSFULLY
         })
     },
-    getProducts: function (isReload) {
+    getProducts: function (isReload, page = AppConstants.DEFAULT_PAGE, pageSize = AppConstants.DEFAULT_PAGESIZE) {
         appDispatcher.handleViewAction({
             actionType: AppConstants.GET_PRODUCTS,
-            isReload: isReload
+            isReload: isReload,
+            page: page,
+            pageSize: pageSize
         })
     },
-    receivedProducts: function (products) {
+    receivedProducts: function (productData) {
         appDispatcher.handleViewAction({
             actionType: AppConstants.RECEIVED_PRODUCTS,
-            products: products
+            productData: productData
         })
     },
     receivedEditableProduct: function (product) {

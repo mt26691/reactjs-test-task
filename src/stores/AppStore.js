@@ -6,7 +6,7 @@ var AppApi = require('../utils/AppApi');
 
 var CHANGE_EVENT = 'change';
 var currentProduct = null;
-var products = [];
+var productData = { total: 0, currentPage: AppConstants.DEFAULT_PAGE, pageSize: AppConstants.DEFAULT_PAGESIZE, products: [] };
 var saveStatus = false;
 var isRemoveProduct = false;
 var isLoading = false;
@@ -17,9 +17,6 @@ var AppStore = assign({}, EventEmiiter.prototype, {
     },
     getLoading: function () {
         return isLoading;
-    },
-    saveProduct: function (product) {
-        products.push(product);
     },
     setEditableProduct: function (product) {
         currentProduct = product;
@@ -41,10 +38,10 @@ var AppStore = assign({}, EventEmiiter.prototype, {
         return isRemoveProduct;
     },
     setProducts: function (newData) {
-        products = newData;
+        productData = newData;
     },
     getProducts: function () {
-        return products;
+        return productData;
     },
     emitChange: function () {
         this.emit('change');
@@ -62,7 +59,7 @@ AppStore.dispatcherIndex = appDispatcher.register(function (payload) {
 
     switch (action.actionType) {
         case AppConstants.GET_PRODUCTS:
-            AppApi.getProducts();
+            AppApi.getProducts(action.page, action.pageSize);
             AppStore.setLoading(true);
             if (action.isReload) {
                 AppStore.setIsRemoveProduct(false);
@@ -70,7 +67,7 @@ AppStore.dispatcherIndex = appDispatcher.register(function (payload) {
             break;
         case AppConstants.RECEIVED_PRODUCTS:
             AppStore.setLoading(false);
-            AppStore.setProducts(action.products);
+            AppStore.setProducts(action.productData);
             break;
         case AppConstants.SAVE_PRODUCT:
             AppStore.setEditableProduct(action.product);
