@@ -9,7 +9,15 @@ var currentProduct = null;
 var products = [];
 var saveStatus = false;
 var isRemoveProduct = false;
+var isLoading = false;
+
 var AppStore = assign({}, EventEmiiter.prototype, {
+    setLoading: function (loading) {
+        isLoading = loading;
+    },
+    getLoading: function () {
+        return isLoading;
+    },
     saveProduct: function (product) {
         products.push(product);
     },
@@ -55,19 +63,23 @@ AppStore.dispatcherIndex = appDispatcher.register(function (payload) {
     switch (action.actionType) {
         case AppConstants.GET_PRODUCTS:
             AppApi.getProducts();
+            AppStore.setLoading(true);
             if (action.isReload) {
                 AppStore.setIsRemoveProduct(false);
             }
             break;
+        case AppConstants.RECEIVED_PRODUCTS:
+            AppStore.setLoading(false);
+            AppStore.setProducts(action.products);
+            break;
         case AppConstants.SAVE_PRODUCT:
             AppStore.setEditableProduct(action.product);
             AppApi.saveProduct(action.product);
-            break;
-        case AppConstants.RECEIVED_PRODUCTS:
-            AppStore.setProducts(action.products);
+            AppStore.setLoading(true);
             break;
         case AppConstants.SAVE_SUCCESSFULLY:
             AppStore.setSaveStatus(true);
+            AppStore.setLoading(false);
             break;
         case AppConstants.DELETE_PRODUCT:
             AppStore.setIsRemoveProduct(true);
@@ -75,10 +87,12 @@ AppStore.dispatcherIndex = appDispatcher.register(function (payload) {
             break;
         case AppConstants.GET_EDITABLE_PRODUCT:
             AppApi.getEditableProduct(action.id);
+            AppStore.setLoading(true);
             AppStore.setSaveStatus(false);
             break;
         case AppConstants.RECEIVED_EDITABLEPRODUCT:
             AppStore.setEditableProduct(action.product);
+            AppStore.setLoading(false);
             break;
         case AppConstants.PRODUCT_NOTFOUND:
             break;

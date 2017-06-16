@@ -7,6 +7,7 @@ import ViewProduct from './ViewProduct';
 import NotFoundPage from './NotFoundPage';
 import Header from './Header';
 import Footer from './Footer';
+import LoadingIndicator from './common/LoadingIndicator/LoadingIndicator';
 
 var appStore = require("../stores/AppStore");
 
@@ -15,7 +16,8 @@ function getAppState() {
     products: appStore.getProducts(),
     editableProduct: appStore.getEditableProduct(),
     saveStatus: appStore.getSaveStatus(),
-    isRemoveProduct: appStore.getIsRemoveProduct()
+    isRemoveProduct: appStore.getIsRemoveProduct(),
+    isLoading: appStore.getLoading()
   };
 }
 class App extends React.Component {
@@ -64,6 +66,9 @@ class App extends React.Component {
             </div>
           </div>
         </div>
+        {
+          this.state.isLoading && <LoadingIndicator />
+        }
         <Footer />
       </div>
     );
