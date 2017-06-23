@@ -22,7 +22,7 @@ export default class Header extends React.Component {
               <li className="active">
                 <Link to="/">Home</Link>
               </li>
-              <li ><Link to="/add">Add Product</Link></li>
+              {/*<li ><Link to="/add">Add Product</Link></li>*/}
             </ul>
           </div>
         </div>

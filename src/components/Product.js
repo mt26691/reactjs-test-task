@@ -1,7 +1,6 @@
 import React from 'react';
-import AppAcion from '../actions/AppAction';
 import { Link } from 'react-router-dom';
-import Confirm from './common/Confirm';
+import Confirm from './Confirm';
 
 export default class Product extends React.Component {
 
@@ -11,8 +10,8 @@ export default class Product extends React.Component {
   }
 
 
-  onDelete(e) {
-    AppAcion.deleteProduct(this.props.product.id);
+  onDelete() {
+    this.props.deleteProduct(this.props.product.id);
   }
 
   render() {
@@ -32,6 +31,7 @@ export default class Product extends React.Component {
           <Link to={editLink} className="btn btn-warning" >Edit</Link>
         </td>
         <td>
+          {/*<button className="btn btn-danger" onClick={this.onDelete.bind(this)}> Delete</button>*/}
           <Confirm
             onConfirm={this.onDelete}
             body="Do you want to delete this product?"

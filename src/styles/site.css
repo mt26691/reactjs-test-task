@@ -1,0 +1,41 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+.error-validation
+{
+  color:#a94442;
+}
+
+body
+{
+  padding:50px;
+}
+.input-error
+{
+  color:red;
+}
+.react-datepicker__input-container
+{
+  width: 100% !important;
+}
+.react-datepicker
+{
+  width:100% !important;
+}
+.date-picker-input
+{
+  cursor: pointer;
+  background-color:#fff !important;
+}
+
+html
+{
+  font-size:15px;
+}
+
+.remove-product-info
+{
+  margin-top:15px
+}

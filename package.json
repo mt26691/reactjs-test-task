@@ -1,18 +1,25 @@
 {
-  "name": "test-task",
+  "name": "my-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "flux": "^3.1.2",
-    "history": "^4.6.2",
-    "object-assign": "^4.1.1",
+    "axios": "^0.16.2",
+    "bootstrap": "3",
+    "connected-react-router": "^4.2.1",
+    "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-bootstrap": "^0.31.0",
-    "react-datepicker": "^0.47.0",
+    "react-datepicker": "^0.48.0",
     "react-dom": "^15.6.1",
     "react-js-pagination": "^2.1.0",
+    "react-redux": "^5.0.5",
     "react-router": "^4.1.1",
-    "react-router-dom": "^4.1.1"
+    "react-router-dom": "^4.1.1",
+    "react-router-redux": "^4.0.8",
+    "redux": "^3.7.0",
+    "redux-form": "^6.8.0",
+    "redux-promise": "^0.5.3",
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "react-scripts": "1.0.7"

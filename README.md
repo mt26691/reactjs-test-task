@@ -21,4 +21,4 @@ npm start
 ```
 
 ## 4/ Technologies used
-This project is developed by Reactjs with Flux framework, which is used for managing application's state.
+This project is developed by Reactjs and Redux
