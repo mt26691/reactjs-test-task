@@ -5,7 +5,6 @@ import { ConnectedRouter } from 'connected-react-router';
 import { Route, Switch } from 'react-router';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Counter from './containers/Counter';
 import ProductDetail from './containers/ProductDetail';
 import ProductList from './containers/ProductList';
 import NotFound from './components/NotFound';
@@ -21,7 +20,6 @@ class App extends Component {
             <Header />
             <Switch>
               <Route exact path="/" component={ProductList} />
-              <Route path="/counter" component={Counter} />
               <Route path="/view/:id" component={ProductDetail} />
               <Route path="/add" component={AddEditProduct} />
               <Route path="/edit/:id" component={AddEditProduct} />
